@@ -73,9 +73,9 @@ const data = [
   {
     title: 'Professional Software Development in 2019',
     date: 'Jan 1st, 2019',
-    firstParagraph: `Hodor hodor HODOR! Hodor hodor - hodor, hodor. Hodor hodor... Hodor hodor hodor; hodor hodor. Hodor hodor hodor, hodor, hodor
-          hodor. Hodor, hodor. Hodor. Hodor, hodor - hodor... Hodor hodor hodor; hodor HODOR hodor, hodor hodor?! Hodor hodor, hodor.
-          Hodor hodor hodor hodor hodor! Hodor hodor - HODOR hodor, hodor hodor hodor hodor hodor; hodor hodor? `,
+    firstParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
+    Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
+    Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor`,
 
     secondParagraph: `Hodor, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
           hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
@@ -85,10 +85,24 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
-  }
+  },
+
+
+  {
+  title: 'This is Alans new data',
+  date: 'Febuary 12th 2020',
+  firstParagraph: `The hardest choices require the strongest wills.”
+  ~ Thanos, Avengers: Infinity War `,
+
+  secondParagraph: `“Hulk smash!” —Bruce Banner (Edward Norton) `,
+
+  thirdParagraph: `“Honestly, until this exact second, I thought you were a Build-a-Bear.” —Tony Stark to Rocket`
+}
 ];
 
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
+
+
   
   <div class="article">
     <h2>{title of the article}</h2>
@@ -112,3 +126,49 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+function createComponent(title, date, firstParagraph, secondParagraph, thirdParagraph){
+
+  //define elements
+  const article = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const paragraphOne = document.createElement('p')
+  const paragraphTwo = document.createElement('p')
+  const paragraphThree = document.createElement('p')
+  const articleSpan = document.createElement('span')
+ 
+
+  // Setting up structure
+ article.appendChild(articleTitle);
+ article.appendChild(articleDate);
+ article.appendChild(paragraphOne);
+ article.appendChild(paragraphTwo);
+ article.appendChild(paragraphThree);
+ article.appendChild(articleSpan);
+
+
+ //adding classes
+ article.classList.add('article');
+ articleDate.classList.add('date');
+ articleSpan.classList.add('expandButton')
+
+ // setting up text content
+ articleTitle.textContent = title;
+ articleDate.textContent = date;
+ paragraphOne.textContent = firstParagraph;
+ paragraphTwo.textContent = secondParagraph;
+ paragraphThree.textContent = thirdParagraph;
+ articleSpan.textContent = 'open'
+
+ articleSpan.addEventListener('click', event => {
+   article.classList.toggle('article-open');
+ })
+return article
+}
+
+const parent = document.querySelector('.articles')
+
+data.map(item => {
+  parent.append(createComponent(item.title, item.date, item.firstParagraph, item.secondParagraph, item.thirdParagraph))
+})
